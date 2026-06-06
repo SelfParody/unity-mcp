@@ -255,17 +255,29 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
                 });
             }
 
-            var tmpInput = go.GetComponent<TMPro.TMP_InputField>();
-            if (tmpInput != null)
+            // Try TMP_InputField via reflection (TMPro may not be referenced)
+            var tmpInputType = Type.GetType("TMPro.TMP_InputField, Unity.TextMeshPro");
+            if (tmpInputType != null)
             {
-                tmpInput.text = text;
-                tmpInput.onEndEdit.Invoke(text);
-                return new SuccessResponse($"Typed into TMP_InputField: {elementName}", new JObject
+                var tmpInput = go.GetComponent(tmpInputType);
+                if (tmpInput != null)
                 {
-                    ["elementName"] = elementName,
-                    ["text"] = text,
-                    ["fieldType"] = "TMP_InputField"
-                });
+                    var textProp = tmpInputType.GetProperty("text");
+                    var onEndEditProp = tmpInputType.GetProperty("onEndEdit");
+                    if (textProp != null) textProp.SetValue(tmpInput, text);
+                    if (onEndEditProp != null)
+                    {
+                        var evt = onEndEditProp.GetValue(tmpInput);
+                        var invokeMethod = evt?.GetType().GetMethod("Invoke");
+                        invokeMethod?.Invoke(evt, new object[] { text });
+                    }
+                    return new SuccessResponse($"Typed into TMP_InputField: {elementName}", new JObject
+                    {
+                        ["elementName"] = elementName,
+                        ["text"] = text,
+                        ["fieldType"] = "TMP_InputField"
+                    });
+                }
             }
 
             return new ErrorResponse(
@@ -292,14 +304,23 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
                     ["componentType"] = "Text"
                 });
 
-            var tmpText = go.GetComponent<TMPro.TextMeshProUGUI>();
-            if (tmpText != null)
-                return new SuccessResponse("Retrieved text.", new JObject
+            // Try TextMeshProUGUI via reflection (TMPro may not be referenced)
+            var tmpTextType = Type.GetType("TMPro.TextMeshProUGUI, Unity.TextMeshPro");
+            if (tmpTextType != null)
+            {
+                var tmpText = go.GetComponent(tmpTextType);
+                if (tmpText != null)
                 {
-                    ["elementName"] = elementName,
-                    ["text"] = tmpText.text,
-                    ["componentType"] = "TextMeshProUGUI"
-                });
+                    var textProp = tmpTextType.GetProperty("text");
+                    string tmpTextValue = textProp?.GetValue(tmpText) as string ?? "";
+                    return new SuccessResponse("Retrieved text.", new JObject
+                    {
+                        ["elementName"] = elementName,
+                        ["text"] = tmpTextValue,
+                        ["componentType"] = "TextMeshProUGUI"
+                    });
+                }
+            }
 
             var inputField = go.GetComponent<InputField>();
             if (inputField != null)
@@ -331,7 +352,7 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
         private static GameObject FindUiElement(string name)
         {
             // Search by exact name first, then partial match
-            var allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+            var allObjects = UnityEngine.Resources.FindObjectsOfTypeAll<GameObject>();
             
             // Prefer active scene objects over prefab assets
             foreach (var go in allObjects)

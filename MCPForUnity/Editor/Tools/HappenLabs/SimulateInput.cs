@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace MCPForUnity.Editor.Tools.HappenLabs
+namespace HappenLabs.MCPForUnity.Tools
 {
     /// <summary>
     /// Input simulation for automated QA testing.

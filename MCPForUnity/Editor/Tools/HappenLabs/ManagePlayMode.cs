@@ -16,6 +16,14 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
     [McpForUnityTool("manage_play_mode", AutoRegister = false, Group = "happenlabs")]
     public static class ManagePlayMode
     {
+        public class Parameters
+        {
+            [ToolParameter("Action to perform: enter, exit, pause, resume, get_state", Required = true)]
+            public string Action { get; set; }
+
+            [ToolParameter("Timeout in seconds for enter/exit operations", Required = false, DefaultValue = "30")]
+            public float? Timeout { get; set; }
+        }
         private const string ActionEnter = "enter";
         private const string ActionExit = "exit";
         private const string ActionPause = "pause";

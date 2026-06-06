@@ -18,6 +18,32 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
     [McpForUnityTool("simulate_input", AutoRegister = false, Group = "happenlabs")]
     public static class SimulateInput
     {
+        public class Parameters
+        {
+            [ToolParameter("Action: key_press, key_hold, key_release, mouse_click, mouse_move, ui_click, ui_type, ui_get_text", Required = true)]
+            public string Action { get; set; }
+
+            [ToolParameter("Key name (KeyCode) for keyboard actions", Required = false)]
+            public string Key { get; set; }
+
+            [ToolParameter("Duration in seconds for key_hold", Required = false, DefaultValue = "0.5")]
+            public float? Duration { get; set; }
+
+            [ToolParameter("Screen X coordinate for mouse actions", Required = false)]
+            public float? X { get; set; }
+
+            [ToolParameter("Screen Y coordinate for mouse actions", Required = false)]
+            public float? Y { get; set; }
+
+            [ToolParameter("Mouse button: left, right, middle", Required = false, DefaultValue = "left")]
+            public string Button { get; set; }
+
+            [ToolParameter("UI element name for ui_click, ui_type, ui_get_text", Required = false)]
+            public string ElementName { get; set; }
+
+            [ToolParameter("Text to type for ui_type action", Required = false)]
+            public string Text { get; set; }
+        }
         private const string ActionKeyPress = "key_press";
         private const string ActionKeyHold = "key_hold";
         private const string ActionKeyRelease = "key_release";

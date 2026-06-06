@@ -17,6 +17,20 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
     [McpForUnityTool("run_qa_check", AutoRegister = false, Group = "happenlabs")]
     public static class RunQACheck
     {
+        public class Parameters
+        {
+            [ToolParameter("Check scope: full, quick, or custom", Required = false, DefaultValue = "quick")]
+            public string Action { get; set; }
+
+            [ToolParameter("Max errors to report for console_errors check", Required = false, DefaultValue = "50")]
+            public int? MaxErrors { get; set; }
+
+            [ToolParameter("Output folder for screenshots", Required = false, DefaultValue = "Temp/QAScreenshots")]
+            public string OutputFolder { get; set; }
+
+            [ToolParameter("Custom check names array (for action=custom): missing_scripts, console_errors, profiler, screenshot", Required = false)]
+            public string[] Checks { get; set; }
+        }
         private const string ActionFull = "full";
         private const string ActionQuick = "quick";
         private const string ActionCustom = "custom";

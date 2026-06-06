@@ -14,7 +14,7 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
     /// Runs multiple validation steps in a single MCP call and returns
     /// a unified pass/fail report.
     /// </summary>
-    [McpForUnityTool("run_qa_check", AutoRegister = false, Group = "happenlabs")]
+    [McpForUnityTool("run_qa_check", AutoRegister = true, Group = "happenlabs")]
     public static class RunQACheck
     {
         public class Parameters

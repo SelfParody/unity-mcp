@@ -15,7 +15,7 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
     /// Works in Play mode only. Uses EventSystem APIs compatible with
     /// both legacy Input Manager and new Input System.
     /// </summary>
-    [McpForUnityTool("simulate_input", AutoRegister = false, Group = "happenlabs")]
+    [McpForUnityTool("simulate_input", AutoRegister = true, Group = "happenlabs")]
     public static class SimulateInput
     {
         public class Parameters

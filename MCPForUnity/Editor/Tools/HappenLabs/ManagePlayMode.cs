@@ -13,7 +13,7 @@ namespace MCPForUnity.Editor.Tools.HappenLabs
     /// Provides structured enter/exit/pause/resume with async readiness polling,
     /// replacing the unsafe execute_code workaround.
     /// </summary>
-    [McpForUnityTool("manage_play_mode", AutoRegister = false, Group = "happenlabs")]
+    [McpForUnityTool("manage_play_mode", AutoRegister = true, Group = "happenlabs")]
     public static class ManagePlayMode
     {
         public class Parameters

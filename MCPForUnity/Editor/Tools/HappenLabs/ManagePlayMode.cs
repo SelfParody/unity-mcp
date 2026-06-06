@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HappenLabs.MCPForUnity.Tools
+namespace MCPForUnity.Editor.Tools.HappenLabs
 {
     /// <summary>
     /// Play mode control for automated QA.

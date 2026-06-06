@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HappenLabs.MCPForUnity.Tools
+namespace MCPForUnity.Editor.Tools.HappenLabs
 {
     /// <summary>
     /// Composite QA check for post-build validation.

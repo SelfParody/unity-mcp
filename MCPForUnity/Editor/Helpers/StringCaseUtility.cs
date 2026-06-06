@@ -13,19 +13,35 @@ namespace MCPForUnity.Editor.Helpers
     {
         /// <summary>
         /// Checks whether a type belongs to the built-in MCP for Unity package.
-        /// Returns true when the type's namespace starts with
-        /// <paramref name="builtInNamespacePrefix"/> or its assembly is MCPForUnity.Editor.
+        /// Returns true when the type's namespace exactly matches
+        /// <paramref name="builtInNamespacePrefix"/> or its assembly is MCPForUnity.Editor
+        /// AND the namespace is not in a sub-namespace (sub-namespaces indicate
+        /// third-party/custom extensions shipped within the same package).
         /// </summary>
         public static bool IsBuiltInMcpType(Type type, string assemblyName, string builtInNamespacePrefix)
         {
-            if (type != null && !string.IsNullOrEmpty(type.Namespace)
-                && type.Namespace.StartsWith(builtInNamespacePrefix, StringComparison.Ordinal))
+            if (type != null && !string.IsNullOrEmpty(type.Namespace))
             {
-                return true;
+                // Exact match = built-in tool (e.g. MCPForUnity.Editor.Tools)
+                if (type.Namespace.Equals(builtInNamespacePrefix, StringComparison.Ordinal))
+                {
+                    return true;
+                }
+
+                // Sub-namespace (e.g. MCPForUnity.Editor.Tools.HappenLabs) = custom extension
+                // Do NOT classify as built-in even though it shares the assembly.
+                if (type.Namespace.StartsWith(builtInNamespacePrefix + ".", StringComparison.Ordinal))
+                {
+                    return false;
+                }
             }
 
+            // Assembly-only check: only applies when namespace doesn't indicate
+            // a sub-namespace extension (handled above).
             if (!string.IsNullOrEmpty(assemblyName)
-                && assemblyName.Equals("MCPForUnity.Editor", StringComparison.Ordinal))
+                && assemblyName.Equals("MCPForUnity.Editor", StringComparison.Ordinal)
+                && (type == null || string.IsNullOrEmpty(type.Namespace)
+                    || !type.Namespace.StartsWith(builtInNamespacePrefix + ".", StringComparison.Ordinal)))
             {
                 return true;
             }

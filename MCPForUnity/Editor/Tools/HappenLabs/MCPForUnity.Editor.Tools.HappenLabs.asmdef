@@ -1,0 +1,21 @@
+{
+    "name": "MCPForUnity.Editor.Tools.HappenLabs",
+    "rootNamespace": "MCPForUnity.Editor.Tools.HappenLabs",
+    "references": [
+        "MCPForUnity.Editor",
+        "MCPForUnity.Runtime"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Newtonsoft.Json.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

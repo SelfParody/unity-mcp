@@ -18,6 +18,8 @@ namespace MCPForUnity.Editor.Resources.Editor
             try
             {
                 var discovery = MCPServiceLocator.ToolDiscovery;
+                // Always invalidate cache so new tools from package updates are discovered
+                discovery.InvalidateCache();
                 var allTools = discovery.DiscoverAllTools();
 
                 var toolsArray = new JArray();

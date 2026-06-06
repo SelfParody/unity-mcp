@@ -7,14 +7,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MCPForUnity.Editor.Tools.HappenLabs
+namespace MCPForUnity.Editor.Tools
 {
     /// <summary>
     /// Composite QA check for post-build validation.
     /// Runs multiple validation steps in a single MCP call and returns
     /// a unified pass/fail report.
     /// </summary>
-    [McpForUnityTool("run_qa_check", AutoRegister = true, Group = "happenlabs")]
+    [McpForUnityTool("run_qa_check", AutoRegister = true, Group = "core")]
     public static class RunQACheck
     {
         public class Parameters

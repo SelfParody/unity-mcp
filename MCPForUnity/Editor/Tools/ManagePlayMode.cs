@@ -6,14 +6,14 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace MCPForUnity.Editor.Tools.HappenLabs
+namespace MCPForUnity.Editor.Tools
 {
     /// <summary>
     /// Play mode control for automated QA.
     /// Provides structured enter/exit/pause/resume with async readiness polling,
     /// replacing the unsafe execute_code workaround.
     /// </summary>
-    [McpForUnityTool("manage_play_mode", AutoRegister = true, Group = "happenlabs")]
+    [McpForUnityTool("manage_play_mode", AutoRegister = true, Group = "core")]
     public static class ManagePlayMode
     {
         public class Parameters

@@ -8,14 +8,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace MCPForUnity.Editor.Tools.HappenLabs
+namespace MCPForUnity.Editor.Tools
 {
     /// <summary>
     /// Input simulation for automated QA testing.
     /// Works in Play mode only. Uses EventSystem APIs compatible with
     /// both legacy Input Manager and new Input System.
     /// </summary>
-    [McpForUnityTool("simulate_input", AutoRegister = true, Group = "happenlabs")]
+    [McpForUnityTool("simulate_input", AutoRegister = true, Group = "core")]
     public static class SimulateInput
     {
         public class Parameters
